@@ -27,7 +27,7 @@ public class SleepingSession {
         return end;
     }
 
-    public long getMinutes () {
+    public long getMinutes() {
         return Duration.between(start, end).toMinutes();
     }
 
