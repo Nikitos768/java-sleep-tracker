@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BadAnalysisTest {
     @Test
     public void shouldReturnNumberSessionsDuration() {
-        SleepingSession OneSession = new SleepingSession(
+        SleepingSession oneSession = new SleepingSession(
                 LocalDateTime.of(2025, 10, 1, 10, 0),
                 LocalDateTime.of(2025, 10, 1, 11, 0),
                 Quality.BAD
         );
-        SleepingSession TwoSession = new SleepingSession(
+        SleepingSession twoSession = new SleepingSession(
                 LocalDateTime.of(2025, 10, 1, 10, 0),
                 LocalDateTime.of(2025, 10, 1, 12, 0),
                 Quality.GOOD
@@ -31,7 +31,7 @@ public class BadAnalysisTest {
                 Quality.NORMAL
         );
 
-        List<SleepingSession> records = List.of(OneSession, TwoSession, freeSession, fourSession);
+        List<SleepingSession> records = List.of(oneSession, twoSession, freeSession, fourSession);
         BadQualitySessionsAnalysis analysis = new BadQualitySessionsAnalysis();
 
         assertEquals(2L, analysis.apply(records).getResult());
