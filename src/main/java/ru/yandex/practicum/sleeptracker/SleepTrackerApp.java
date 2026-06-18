@@ -23,15 +23,16 @@ public class SleepTrackerApp {
             records -> new SleeplessNightsAnalysis().apply(records),
             records -> new ChronotypeAnalysis().apply(records)
     );
+
     public static void main(String[] args) {
         String filePath = (args.length > 0) ? args[0] : "src/main/resources/sleep_log.txt";
         List<SleepingSession> records = readSleepData(filePath);
         analyses.stream()
                 .filter(analysis -> !records.isEmpty())
                 .forEach(analysis -> {
-            SleepAnaLysisResult<?> result = analysis.apply(records);
-            System.out.println(result);
-        });
+                    SleepAnaLysisResult<?> result = analysis.apply(records);
+                    System.out.println(result);
+                });
     }
 
     public static List<SleepingSession> readSleepData(String filePath) {

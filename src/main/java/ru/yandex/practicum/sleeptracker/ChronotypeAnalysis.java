@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class ChronotypeAnalysis implements Function<List<SleepingSession>, SleepAnaLysisResult<Chronotype>> {
     @Override
-    public  SleepAnaLysisResult<Chronotype> apply(List<SleepingSession> sessions) {
+    public SleepAnaLysisResult<Chronotype> apply(List<SleepingSession> sessions) {
         Map<Chronotype, Long> counts = sessions.stream()
                 .filter(session -> !session.getStart().toLocalDate().equals(session.getEnd().toLocalDate()))
                 .map(ChronotypeAnalysis::determineNightType)
