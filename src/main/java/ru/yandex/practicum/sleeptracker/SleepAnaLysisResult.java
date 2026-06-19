@@ -23,6 +23,6 @@ public class SleepAnaLysisResult<T> {
                 ? String.format("%.2f", result)
                 : String.valueOf(result);
 
-        return answer + " " + formattedResult;
+        return answer +" "+ formattedResult;
     }
 }
