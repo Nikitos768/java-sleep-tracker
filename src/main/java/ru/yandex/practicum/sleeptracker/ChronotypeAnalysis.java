@@ -33,4 +33,5 @@ public class ChronotypeAnalysis implements Function<List<SleepingSession>, Sleep
         boolean isLark = startHour < 22 && endHour < 7;
 
         return isOwl ? Chronotype.OWL : (isLark ? Chronotype.LARK : Chronotype.PIGEON);
-    }}
+    }
+}
