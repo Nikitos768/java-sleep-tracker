@@ -34,4 +34,4 @@ public class ChronotypeAnalysis implements Function<List<SleepingSession>, Sleep
 
         return isOwl ? Chronotype.OWL : (isLark ? Chronotype.LARK : Chronotype.PIGEON);
     }
-}
+} 
