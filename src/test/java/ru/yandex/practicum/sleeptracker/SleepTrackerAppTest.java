@@ -4,33 +4,41 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class SleepTrackerAppTest {
 
     @Test
     public void shouldReturnCorrectSessionsCount() {
-        List<SleepingSession> testRecords = List.of(
-                new SleepingSession(null, null, null),
-                new SleepingSession(null, null, null)
+        SleepingSession oneSession = new SleepingSession(
+                LocalDateTime.of(2025, 10, 1, 22, 0),
+                LocalDateTime.of(2025, 10, 1, 23, 30),
+                Quality.GOOD
+        );
+        SleepingSession twoSession = new SleepingSession(
+                LocalDateTime.of(2025, 10, 1, 10, 0),
+                LocalDateTime.of(2025, 10, 1, 12, 0),
+                Quality.GOOD
         );
 
         TotalSessionsAnalysis analysis = new TotalSessionsAnalysis();
+        List<SleepingSession> records = List.of(oneSession, twoSession);
 
-        SleepAnaLysisResult<Integer> result = analysis.apply(testRecords);
-
-        assertEquals(2, result.getResult());
+        assertEquals(2, analysis.apply(records).getResult());
     }
 
     @Test
     public void shouldReturnCorrectDescriptionText() {
-        List<SleepingSession> testRecords = List.of(
-                new SleepingSession(null, null, null)
+        SleepingSession twoSession = new SleepingSession(
+                LocalDateTime.of(2025, 10, 1, 10, 0),
+                LocalDateTime.of(2025, 10, 1, 12, 0),
+                Quality.GOOD
         );
 
         TotalSessionsAnalysis analysis = new TotalSessionsAnalysis();
-        SleepAnaLysisResult<Integer> result = analysis.apply(testRecords);
+        List<SleepingSession> records = List.of(twoSession);
 
-        assertEquals("Количество сессий сна: ", result.getAnswer());
+        assertEquals("Количество сессий сна: ", analysis.apply(records).getAnswer());
     }
 }

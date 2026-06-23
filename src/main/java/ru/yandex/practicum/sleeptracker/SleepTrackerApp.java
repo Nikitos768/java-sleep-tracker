@@ -25,14 +25,18 @@ public class SleepTrackerApp {
     );
 
     public static void main(String[] args) {
-        String filePath = (args.length > 0) ? args[0] : "src/main/resources/sleep_log.txt";
-        List<SleepingSession> records = readSleepData(filePath);
-        analyses.stream()
-                .filter(analysis -> !records.isEmpty())
-                .forEach(analysis -> {
-                    SleepAnaLysisResult<?> result = analysis.apply(records);
-                    System.out.println(result);
-                });
+        try {
+            String filePath = (args.length > 0) ? args[0] : "src/main/resources/sleep_log.txt";
+            List<SleepingSession> records = readSleepData(filePath);
+            analyses.stream()
+                    .filter(analysis -> !records.isEmpty())
+                    .forEach(analysis -> {
+                        SleepAnaLysisResult<?> result = analysis.apply(records);
+                        System.out.println(result);
+                    });
+        } catch (RuntimeException e) {
+            System.out.print("Произошла ошибка при выполнении программы: " + e.getMessage());
+        }
     }
 
     public static List<SleepingSession> readSleepData(String filePath) {
@@ -50,8 +54,7 @@ public class SleepTrackerApp {
                     })
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении файла: " + e.getMessage());
-            return Collections.emptyList();
+            throw new RuntimeException("Не удалось прочитать файл: " + filePath, e);
         }
     }
 }

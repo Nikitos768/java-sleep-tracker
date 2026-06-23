@@ -9,6 +9,6 @@ public class BadQualitySessionsAnalysis implements Function<List<SleepingSession
         long bedSleep = sessions.stream()
                 .filter(session -> session.getQuality() == Quality.BAD)
                 .count();
-        return new SleepAnaLysisResult<>("Количество плохих ночей сна: ", bedSleep);
+        return new SleepAnaLysisResult<>("Количество плохих сессий сна: ", bedSleep);
     }
 }
